@@ -1529,10 +1529,21 @@ export default function MobileApp() {
               >
                 Why Choose Us
               </a>
-              <button
+<button
   onClick={() => {
-    document.getElementById('why-gramhour')
-      ?.scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById('why-gramhour-section');
+
+    if (section) {
+      const y =
+        section.getBoundingClientRect().top +
+        window.pageYOffset -
+        140;
+
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth',
+      });
+    }
   }}
   className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
   style={{ fontFamily: 'DM Sans, sans-serif' }}
