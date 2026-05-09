@@ -435,12 +435,18 @@ export default function MobileApp() {
                   {/* Why Choose Us */}
                   <li className="border-b border-[rgba(196,148,58,0.2)]">
                     <a
-                      href="#"
-                      className="block py-4 text-white text-[22px] font-bold hover:text-[#C4943A] transition-colors"
-                      style={{ fontFamily: 'Playfair Display, serif' }}
-                    >
-                      Why Choose Us
-                    </a>
+                      href="#why-gramhour"
+  onClick={(e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    document.getElementById('why-gramhour')
+      ?.scrollIntoView({ behavior: 'smooth' });
+  }}
+  className="block py-4 text-white text-[22px] font-bold hover:text-[#C4943A] transition-colors"
+  style={{ fontFamily: 'Playfair Display, serif' }}
+>
+  Why Choose Us
+</a>
                   </li>
 
                   {/* Student Reviews */}
