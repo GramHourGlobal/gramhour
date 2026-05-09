@@ -228,7 +228,7 @@ export default function App() {
             {/* Logo */}
             <div className="flex items-center">
               <img
-                src="/src/imports/watermark_PNG.png"
+                src="/logo.png"
                 alt="GramHour Global"
                 className="h-11"
                 style={{ mixBlendMode: 'multiply', opacity: 1 }}
