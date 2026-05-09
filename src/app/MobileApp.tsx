@@ -231,7 +231,7 @@ export default function App() {
                 src="/logo.png"
                 alt="GramHour Global"
                 className="h-11"
-                style={{ opacity: 1 }}
+                style={{ mixBlendMode: 'multiply', opacity: 1 }}
               />
             </div>
             {/* Hamburger */}
