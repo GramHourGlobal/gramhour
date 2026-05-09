@@ -226,14 +226,23 @@ export default function DesktopApp() {
             }}
           >
             {/* Logo - Left */}
-            <div className="flex items-center flex-shrink-0">
-              <img
-                src="/logo.png"
-                alt="GramHour Global"
-                className="h-11"
-                style={{}}
-              />
-            </div>
+            <div className="flex items-center gap-3">
+  <img
+    src="/logo.png"
+    alt="GramHour Global"
+    className="h-11"
+  />
+
+  <div className="flex flex-col leading-none">
+    <span className="text-white text-lg font-semibold tracking-wide">
+      GramHour
+    </span>
+
+    <span className="text-yellow-400 text-sm tracking-[0.25em] uppercase">
+      Global
+    </span>
+  </div>
+</div>
 
             {/* Navigation Links - Center */}
             <div className="flex items-center gap-8 flex-1 justify-center">
