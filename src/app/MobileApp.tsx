@@ -1484,7 +1484,7 @@ export default function MobileApp() {
           {/* Logo Row */}
           <div className="relative z-10 mb-10 flex flex-col items-center text-center">
             <img
-              src="/src/imports/watermark_PNG.png"
+              src="/logo.png"
               alt="GramHour Global"
               className="w-40 mb-4"
               style={{}}
