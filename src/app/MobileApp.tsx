@@ -226,14 +226,23 @@ export default function MobileApp() {
             }}
           >
             {/* Logo */}
-            <div className="flex items-center">
-              <img
-                src="/logo.png"
-                alt="GramHour Global"
-                className="h-11"
-                style={{ opacity: 1 }}
-              />
-            </div>
+           <div className="flex items-center gap-3">
+  <img
+    src="/logo.png"
+    alt="GramHour Global"
+    className="h-11"
+  />
+
+  <div className="flex flex-col leading-none">
+    <span className="text-white text-lg font-semibold tracking-wide">
+      GramHour
+    </span>
+
+    <span className="text-yellow-400 text-sm tracking-[0.25em] uppercase">
+      Global
+    </span>
+  </div>
+</div>
             {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(true)}
