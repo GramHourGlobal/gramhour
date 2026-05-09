@@ -12,7 +12,7 @@ import PersonalityDevelopmentPage from './components/PersonalityDevelopmentPage'
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 
-export default function DesktopApp() {
+export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [coursesExpanded, setCoursesExpanded] = useState(false);
   const [showBookingPage, setShowBookingPage] = useState(false);
@@ -214,9 +214,9 @@ export default function DesktopApp() {
   }
 
   return (
-    <div className="size-full flex justify-center bg-[#000000]">
+    <div className="size-full flex justify-center bg-[#000000] overflow-x-hidden">
       {/* Desktop Frame - 1440px wide */}
-      <div className="w-[1440px] min-h-screen bg-[#000000] relative">
+      <div className="w-[1440px] min-h-screen bg-[#000000] relative overflow-hidden">
         {/* Navbar - Desktop */}
         <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[1440px] px-20">
           <div
@@ -226,33 +226,29 @@ export default function DesktopApp() {
             }}
           >
             {/* Logo - Left */}
-           <div className="flex items-center gap-3">
-  <img
-    src="/logo.png"
-    alt="GramHour Global"
-    className="h-11"
-  />
-
-  <div className="flex flex-col leading-none">
-    <span className="text-white text-lg font-semibold tracking-wide">
-      GramHour
-    </span>
-
-    <span className="text-yellow-400 text-sm tracking-[0.25em] uppercase">
-      Global
-    </span>
-  </div>
-</div>
+            <div className="flex items-center flex-shrink-0">
+              <img
+                src="/logo.png"
+                alt="GramHour Global"
+                className="h-11"
+                style={{}}
+              />
+            </div>
 
             {/* Navigation Links - Center */}
             <div className="flex items-center gap-8 flex-1 justify-center">
-              <a
-                href="#"
+              <button
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  });
+                }}
                 className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 Home
-              </a>
+              </button>
               <div className="relative group">
                 <button
                   className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
@@ -332,26 +328,12 @@ export default function DesktopApp() {
                 Why Choose Us
               </button>
               <button
-  onClick={() => {
-    const section = document.getElementById('why-gramhour-section');
-
-    if (section) {
-      const y =
-        section.getBoundingClientRect().top +
-        window.pageYOffset -
-        140;
-
-      window.scrollTo({
-        top: y,
-        behavior: 'smooth',
-      });
-    }
-  }}
-  className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
-  style={{ fontFamily: 'DM Sans, sans-serif' }}
->
-  Why Choose Us
-</button>
+                onClick={() => setShowTestimonialsPage(true)}
+                className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
+              >
+                Student Reviews
+              </button>
               <button
                 onClick={() => setShowAboutPage(true)}
                 className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
@@ -404,9 +386,9 @@ export default function DesktopApp() {
 
           {/* Floating Gold Particles - Hero Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-hero-desktop">
-            {[...Array(30)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.25 : size === 4 ? 0.18 : 0.12;
+            {[...Array(45)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.35 : size === 6 ? 0.30 : size === 4 ? 0.22 : 0.16;
               return (
                 <div
                   key={i}
@@ -507,9 +489,9 @@ export default function DesktopApp() {
         <section className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
           {/* Floating Gold Particles - Programs Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-programs-desktop">
-            {[...Array(18)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.22 : size === 4 ? 0.18 : 0.14;
+            {[...Array(28)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.32 : size === 6 ? 0.28 : size === 4 ? 0.22 : 0.18;
               return (
                 <div
                   key={i}
@@ -1065,9 +1047,9 @@ export default function DesktopApp() {
         <section id="why-gramhour-section" className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
           {/* Floating Gold Particles - Why GramHour Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-whygramhour-desktop">
-            {[...Array(14)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.20 : size === 4 ? 0.16 : 0.12;
+            {[...Array(24)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.30 : size === 6 ? 0.26 : size === 4 ? 0.20 : 0.14;
               return (
                 <div
                   key={i}
@@ -1184,9 +1166,9 @@ export default function DesktopApp() {
         <section className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
           {/* Floating Gold Particles - Testimonials Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-testimonials-desktop">
-            {[...Array(12)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.18 : size === 4 ? 0.14 : 0.10;
+            {[...Array(20)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.28 : size === 6 ? 0.24 : size === 4 ? 0.18 : 0.12;
               return (
                 <div
                   key={i}
@@ -1315,9 +1297,9 @@ export default function DesktopApp() {
         <section className="px-20 py-32 bg-[#000000] relative overflow-hidden">
           {/* Floating Gold Particles - Focused Training Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-focused-desktop">
-            {[...Array(16)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.22 : size === 4 ? 0.16 : 0.12;
+            {[...Array(26)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.32 : size === 6 ? 0.28 : size === 4 ? 0.20 : 0.14;
               return (
                 <div
                   key={i}
@@ -1377,9 +1359,9 @@ export default function DesktopApp() {
         <section className="px-20 py-32 bg-[#000000] relative overflow-hidden">
           {/* Floating Gold Particles - CTA Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-cta-desktop">
-            {[...Array(22)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.25 : size === 4 ? 0.22 : 0.18;
+            {[...Array(35)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.38 : size === 6 ? 0.32 : size === 4 ? 0.26 : 0.20;
               return (
                 <div
                   key={i}
@@ -1452,9 +1434,9 @@ export default function DesktopApp() {
         <footer className="relative px-20 py-20 bg-[#000000] border-t border-[rgba(196,148,58,0.2)] overflow-hidden">
           {/* Floating Gold Particles - Footer Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-footer-desktop">
-            {[...Array(8)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.15 : size === 4 ? 0.10 : 0.08;
+            {[...Array(12)].map((_, i) => {
+              const size = [3, 4, 6, 8][Math.floor(Math.random() * 4)];
+              const opacity = size === 8 ? 0.22 : size === 6 ? 0.18 : size === 4 ? 0.12 : 0.10;
               return (
                 <div
                   key={i}
@@ -1529,6 +1511,13 @@ export default function DesktopApp() {
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     Why Choose Us
+                  </button>
+                  <button
+                    onClick={() => setShowTestimonialsPage(true)}
+                    className="text-[rgba(255,250,240,0.8)] text-[16px] hover:text-[#C4943A] transition-all duration-300 hover:translate-x-1 text-left"
+                    style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  >
+                    Student Reviews
                   </button>
                 </div>
               </div>
