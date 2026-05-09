@@ -275,7 +275,7 @@ export default function App() {
               {/* Logo Section */}
               <div className="flex flex-col items-center pt-12 pb-8 px-6">
                 <img
-                  src="/src/imports/watermark_PNG.png"
+                  src="/logo.png"
                   alt="GramHour Global"
                   className="w-40"
                   style={{}}
@@ -553,7 +553,7 @@ export default function App() {
           <div className="relative z-10 flex flex-col items-center text-center">
             {/* Logo */}
             <img
-              src="/src/imports/watermark_PNG.png"
+              src="/logo.png"
               alt="GramHour Global"
               className="w-50 mb-8"
               style={{}}
