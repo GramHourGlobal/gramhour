@@ -332,19 +332,25 @@ export default function DesktopApp() {
                 Why Choose Us
               </button>
               <button
-                onClick={() => setShowTestimonialsPage(true)}
-                className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                Student Reviews
-              </button>
-              <button
-                onClick={() => setShowAboutPage(true)}
-                className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                About Us
-              </button>
+  onClick={() => {
+    document.getElementById('why-gramhour')
+      ?.scrollIntoView({ behavior: 'smooth' });
+  }}
+  className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
+  style={{ fontFamily: 'DM Sans, sans-serif' }}
+>
+  Why Choose Us
+</button>
+             <button
+  onClick={() => {
+    document.getElementById('why-gramhour')
+      ?.scrollIntoView({ behavior: 'smooth' });
+  }}
+  className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
+  style={{ fontFamily: 'DM Sans, sans-serif' }}
+>
+  Why Choose Us
+</button>
               <button
                 onClick={() => setShowContactPage(true)}
                 className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
@@ -1516,13 +1522,16 @@ export default function DesktopApp() {
                   >
                     Why Choose Us
                   </button>
-                  <button
-                    onClick={() => setShowTestimonialsPage(true)}
-                    className="text-[rgba(255,250,240,0.8)] text-[16px] hover:text-[#C4943A] transition-all duration-300 hover:translate-x-1 text-left"
-                    style={{ fontFamily: 'DM Sans, sans-serif' }}
-                  >
-                    Student Reviews
-                  </button>
+              <button
+  onClick={() => {
+    document.getElementById('why-gramhour')
+      ?.scrollIntoView({ behavior: 'smooth' });
+  }}
+  className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
+  style={{ fontFamily: 'DM Sans, sans-serif' }}
+>
+  Why Choose Us
+</button>
                 </div>
               </div>
 
