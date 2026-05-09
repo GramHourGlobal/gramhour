@@ -12,7 +12,7 @@ import PersonalityDevelopmentPage from './components/PersonalityDevelopmentPage'
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 
-export default function App() {
+export default function MobileApp() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [coursesExpanded, setCoursesExpanded] = useState(false);
   const [showBookingPage, setShowBookingPage] = useState(false);
