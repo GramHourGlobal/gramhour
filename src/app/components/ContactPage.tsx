@@ -24,7 +24,7 @@ export default function ContactPage({ onClose }: ContactPageProps) {
           {/* Logo */}
           <div className="flex items-center">
             <img
-              src="/src/imports/watermark_PNG.png"
+              src="/logo.png"
               alt="GramHour Global"
               className="h-11"
               style={{ mixBlendMode: 'multiply', opacity: 1 }}
@@ -83,7 +83,7 @@ export default function ContactPage({ onClose }: ContactPageProps) {
             <div className="flex flex-col items-center mb-4">
               <div className="bg-white rounded-xl p-2 mb-2">
                 <img
-                  src="/src/imports/Insta_QR.jpeg"
+                  src="/InstaQR.jpeg"
                   alt="Instagram QR Code"
                   className="w-[140px] h-[140px]"
                 />
