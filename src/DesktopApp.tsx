@@ -228,7 +228,7 @@ export default function DesktopApp() {
             {/* Logo - Left */}
             <div className="flex items-center flex-shrink-0">
               <img
-                src="/src/imports/watermark_PNG.png"
+                src="/logo.png"
                 alt="GramHour Global"
                 className="h-11"
                 style={{}}
@@ -452,7 +452,7 @@ export default function DesktopApp() {
             {/* Right Column - Large Logo */}
             <div className="flex items-center justify-center">
               <img
-                src="/src/imports/watermark_PNG.png"
+                src="/logo.png"
                 alt="GramHour Global"
                 className="w-[500px]"
                 style={{
@@ -1454,7 +1454,7 @@ export default function DesktopApp() {
             {/* Top Row - Logo and Description */}
             <div className="mb-12 flex flex-col items-center text-center">
               <img
-                src="/src/imports/watermark_PNG.png"
+                src="/logo.png"
                 alt="GramHour Global"
                 className="w-48 mb-5"
                 style={{}}
