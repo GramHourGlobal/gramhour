@@ -331,16 +331,6 @@ export default function DesktopApp() {
               >
                 Why Choose Us
               </button>
-             <button
-  onClick={() => {
-    document.getElementById('why-gramhour')
-      ?.scrollIntoView({ behavior: 'smooth' });
-  }}
-  className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
-  style={{ fontFamily: 'DM Sans, sans-serif' }}
->
-  Why Choose Us
-</button>
               <button
                 onClick={() => setShowAboutPage(true)}
                 className="text-white hover:text-[#C4943A] transition-colors text-[15px]"
