@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/desktop/:path*",
+      "source": "/desktop",
       "destination": "/desktop/index.html"
+    },
+    {
+      "source": "/desktop/:path*",
+      "destination": "/desktop/:path*"
     }
   ]
 }
