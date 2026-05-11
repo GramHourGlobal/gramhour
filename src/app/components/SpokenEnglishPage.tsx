@@ -1,4 +1,4 @@
-import { CircleCheckBig, X } from 'lucide-react';
+import { CircleCheckBig } from 'lucide-react';
 
 interface SpokenEnglishPageProps {
   onClose: () => void;
@@ -7,7 +7,7 @@ interface SpokenEnglishPageProps {
 
 export default function SpokenEnglishPage({ onClose, onBookDemo }: SpokenEnglishPageProps) {
   return (
-    <div className="w-[375px] min-h-screen bg-[#0A0A0A] relative overflow-y-auto">
+    <div className="w-full min-h-screen bg-[#0A0A0A] relative overflow-y-auto">
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[rgba(196,148,58,0.2)] px-6 py-4">
         <div className="flex items-center justify-between">
@@ -20,13 +20,13 @@ export default function SpokenEnglishPage({ onClose, onBookDemo }: SpokenEnglish
               style={{ mixBlendMode: 'multiply', opacity: 1 }}
             />
           </div>
-          {/* Close Button */}
+          {/* Back Button */}
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(196,148,58,0.1)] transition-colors"
-            aria-label="Close"
+            className="text-[#C4943A] font-semibold hover:text-[#E0B050] transition-colors"
+            aria-label="Back"
           >
-            <X className="w-5 h-5 text-[#C4943A]" />
+            ← Back to Courses
           </button>
         </div>
       </nav>
@@ -44,14 +44,14 @@ export default function SpokenEnglishPage({ onClose, onBookDemo }: SpokenEnglish
           Speak Fluently. Communicate Confidently.
         </p>
         <p
-          className="text-[#FFFAF0] text-[15px] max-w-[300px] mx-auto mb-8 leading-relaxed"
+          className="text-[#FFFAF0] text-[15px] max-w-[600px] mx-auto mb-8 leading-relaxed"
           style={{ fontFamily: 'DM Sans, sans-serif' }}
         >
           Break the silence. Build the confidence to speak in any room, any language, anywhere.
         </p>
         <button
           onClick={onBookDemo}
-          className="w-full max-w-[280px] h-14 bg-[#C4943A] text-[#0A0A0A] font-bold rounded-full hover:bg-[#E0B050] transition-colors"
+          className="w-full max-w-[400px] h-14 bg-[#C4943A] text-[#0A0A0A] font-bold rounded-full hover:bg-[#E0B050] transition-colors"
           style={{ fontFamily: 'DM Sans, sans-serif' }}
         >
           Book Free Demo →
@@ -60,21 +60,21 @@ export default function SpokenEnglishPage({ onClose, onBookDemo }: SpokenEnglish
 
       {/* What You'll Learn Section */}
       <section className="px-6 py-12 bg-[#000000]">
-        <h2 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
-          <span className="text-white text-[28px] font-bold">What You'll </span>
-          <span className="text-[#C4943A] text-[28px] font-bold">Learn</span>
+        <h2 className="mb-8 text-center" style={{ fontFamily: 'Playfair Display, serif' }}>
+          <span className="text-white text-[34px] font-bold">What You'll </span>
+          <span className="text-[#C4943A] text-[34px] font-bold">Learn</span>
         </h2>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 mx-[30%]">
           <div className="flex items-start gap-3">
             <CircleCheckBig className="w-6 h-6 text-[#C4943A] flex-shrink-0 mt-0.5" />
-            <span className="text-white text-[15px]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <span className="text-white text-[18px]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Fluency building through daily practice
             </span>
           </div>
           <div className="flex items-start gap-3">
             <CircleCheckBig className="w-6 h-6 text-[#C4943A] flex-shrink-0 mt-0.5" />
-            <span className="text-white text-[15px]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <span className="text-white text-[18px]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Accent neutralization and clarity
             </span>
           </div>

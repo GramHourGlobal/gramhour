@@ -7,7 +7,7 @@ interface AboutPageProps {
 
 export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
   return (
-    <div className="w-[375px] min-h-screen bg-[#000000] relative overflow-y-auto">
+    <div className="w-[90vw] max-w-[1000px] min-h-screen bg-[#000000] relative overflow-y-auto">
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-[#000000]/95 backdrop-blur-md border-b border-[rgba(196,148,58,0.2)] px-6 py-4">
         <div className="flex items-center justify-between">
@@ -45,7 +45,7 @@ export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
         </p>
 
         {/* Body Text */}
-        <div className="max-w-[310px] mx-auto">
+        <div className="max-w-[600px] mx-auto">
           <p
             className="text-[#FFFAF0] text-[15px] leading-relaxed mb-6"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -83,7 +83,7 @@ export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
 
           {/* Body */}
           <p
-            className="text-[#FFFAF0] text-[15px] text-center leading-relaxed max-w-[280px] mx-auto"
+            className="text-[#FFFAF0] text-[15px] text-center leading-relaxed max-w-[500px] mx-auto"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             To empower every student with the communication skills, confidence, and clarity to succeed in any global environment.
@@ -113,7 +113,7 @@ export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
               Excellence First
             </h3>
             <p
-              className="text-[#FFFAF0] text-[14px] max-w-[280px]"
+              className="text-[#FFFAF0] text-[14px] max-w-[500px]"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               We never settle for average results.
@@ -132,7 +132,7 @@ export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
               Student Centered
             </h3>
             <p
-              className="text-[#FFFAF0] text-[14px] max-w-[280px]"
+              className="text-[#FFFAF0] text-[14px] max-w-[500px]"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               Every decision we make puts our students first.
@@ -151,7 +151,7 @@ export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
               Global Vision
             </h3>
             <p
-              className="text-[#FFFAF0] text-[14px] max-w-[280px]"
+              className="text-[#FFFAF0] text-[14px] max-w-[500px]"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               We prepare students for international standards.
@@ -170,7 +170,7 @@ export default function AboutPage({ onClose, onBookDemo }: AboutPageProps) {
               Real Transformation
             </h3>
             <p
-              className="text-[#FFFAF0] text-[14px] max-w-[280px]"
+              className="text-[#FFFAF0] text-[14px] max-w-[500px]"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               Skills that work in real life, not just classrooms.

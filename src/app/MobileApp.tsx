@@ -1,5 +1,5 @@
 import { CircleCheckBig, Target, Award, Users, Star, ChevronLeft, ChevronRight, Instagram, Phone, Mail, Zap, X, ChevronDown, ChevronRight as ChevronRightIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
@@ -69,6 +69,32 @@ export default function App() {
   const [showAboutPage, setShowAboutPage] = useState(false);
   const [showContactPage, setShowContactPage] = useState(false);
 
+  const closeCoursePages = () => {
+    setShowIELTSPage(false);
+    setShowSpokenEnglishPage(false);
+    setShowSoftSkillPage(false);
+    setShowSalesCommunicationPage(false);
+    setShowInterviewPreparationPage(false);
+    setShowCommunicationSkillsPage(false);
+    setShowPersonalityDevelopmentPage(false);
+  };
+
+  const openCoursePage = (setter: (value: boolean) => void, pageName: string) => {
+    setter(true);
+    if (typeof window !== 'undefined') {
+      window.history.pushState({ page: pageName }, '', `#${pageName}`);
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      closeCoursePages();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   if (showBookingPage) {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
@@ -81,7 +107,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <IELTSPage
-          onClose={() => setShowIELTSPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowIELTSPage(false);
             setShowBookingPage(true);
@@ -95,7 +121,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <SpokenEnglishPage
-          onClose={() => setShowSpokenEnglishPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowSpokenEnglishPage(false);
             setShowBookingPage(true);
@@ -109,7 +135,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <SoftSkillPage
-          onClose={() => setShowSoftSkillPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowSoftSkillPage(false);
             setShowBookingPage(true);
@@ -123,7 +149,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <SalesCommunicationPage
-          onClose={() => setShowSalesCommunicationPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowSalesCommunicationPage(false);
             setShowBookingPage(true);
@@ -137,7 +163,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <InterviewPreparationPage
-          onClose={() => setShowInterviewPreparationPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowInterviewPreparationPage(false);
             setShowBookingPage(true);
@@ -151,7 +177,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <CommunicationSkillsPage
-          onClose={() => setShowCommunicationSkillsPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowCommunicationSkillsPage(false);
             setShowBookingPage(true);
@@ -165,7 +191,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <PersonalityDevelopmentPage
-          onClose={() => setShowPersonalityDevelopmentPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowPersonalityDevelopmentPage(false);
             setShowBookingPage(true);
@@ -318,7 +344,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowIELTSPage(true);
+                              openCoursePage(setShowIELTSPage, 'ielts');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -331,7 +357,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowSpokenEnglishPage(true);
+                              openCoursePage(setShowSpokenEnglishPage, 'spoken-english');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -344,7 +370,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowSoftSkillPage(true);
+                              openCoursePage(setShowSoftSkillPage, 'soft-skill');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -357,7 +383,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowSalesCommunicationPage(true);
+                              openCoursePage(setShowSalesCommunicationPage, 'sales-communication');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -370,7 +396,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowInterviewPreparationPage(true);
+                              openCoursePage(setShowInterviewPreparationPage, 'interview-preparation');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -383,7 +409,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowCommunicationSkillsPage(true);
+                              openCoursePage(setShowCommunicationSkillsPage, 'communication-skills');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -396,7 +422,7 @@ export default function App() {
                           <button
                             onClick={() => {
                               setMenuOpen(false);
-                              setShowPersonalityDevelopmentPage(true);
+                              openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development');
                             }}
                             className="flex items-center gap-2 text-[#C4943A] text-[16px] hover:text-[#C4943A] transition-colors py-1 w-full text-left"
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -707,7 +733,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowIELTSPage(true)}
+                onClick={() => openCoursePage(setShowIELTSPage, 'ielts')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -767,7 +793,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowSpokenEnglishPage(true)}
+                onClick={() => openCoursePage(setShowSpokenEnglishPage, 'spoken-english')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -827,7 +853,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowSoftSkillPage(true)}
+                onClick={() => openCoursePage(setShowSoftSkillPage, 'soft-skill')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -887,7 +913,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowSalesCommunicationPage(true)}
+                onClick={() => openCoursePage(setShowSalesCommunicationPage, 'sales-communication')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -947,7 +973,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowInterviewPreparationPage(true)}
+                onClick={() => openCoursePage(setShowInterviewPreparationPage, 'interview-preparation')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -1007,7 +1033,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowCommunicationSkillsPage(true)}
+                onClick={() => openCoursePage(setShowCommunicationSkillsPage, 'communication-skills')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -1067,7 +1093,7 @@ export default function App() {
 
               {/* View Course Button */}
               <button
-                onClick={() => setShowPersonalityDevelopmentPage(true)}
+                onClick={() => openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development')}
                 className="w-full h-11 border border-[#C4943A] bg-transparent text-[#C4943A] rounded-[22px] font-semibold hover:bg-[#C4943A] hover:text-[#0A0A0A] transition-all duration-200"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >

@@ -1,5 +1,5 @@
 import { CircleCheckBig, Target, Award, Users, Star, ChevronLeft, ChevronRight, Instagram, Phone, Mail, Zap, X, ChevronDown, ChevronRight as ChevronRightIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
@@ -64,6 +64,33 @@ export default function App() {
   const prevTestimonial = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
+
+  const closeCoursePages = () => {
+    setShowIELTSPage(false);
+    setShowSpokenEnglishPage(false);
+    setShowSoftSkillPage(false);
+    setShowSalesCommunicationPage(false);
+    setShowInterviewPreparationPage(false);
+    setShowCommunicationSkillsPage(false);
+    setShowPersonalityDevelopmentPage(false);
+  };
+
+  const openCoursePage = (setter: (value: boolean) => void, pageName: string) => {
+    setter(true);
+    if (typeof window !== 'undefined') {
+      window.history.pushState({ page: pageName }, '', `#${pageName}`);
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      closeCoursePages();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const [showCommunicationSkillsPage, setShowCommunicationSkillsPage] = useState(false);
   const [showPersonalityDevelopmentPage, setShowPersonalityDevelopmentPage] = useState(false);
   const [showAboutPage, setShowAboutPage] = useState(false);
@@ -81,7 +108,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <IELTSPage
-          onClose={() => setShowIELTSPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowIELTSPage(false);
             setShowBookingPage(true);
@@ -95,7 +122,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <SpokenEnglishPage
-          onClose={() => setShowSpokenEnglishPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowSpokenEnglishPage(false);
             setShowBookingPage(true);
@@ -109,7 +136,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <SoftSkillPage
-          onClose={() => setShowSoftSkillPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowSoftSkillPage(false);
             setShowBookingPage(true);
@@ -123,7 +150,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <SalesCommunicationPage
-          onClose={() => setShowSalesCommunicationPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowSalesCommunicationPage(false);
             setShowBookingPage(true);
@@ -137,7 +164,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <InterviewPreparationPage
-          onClose={() => setShowInterviewPreparationPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowInterviewPreparationPage(false);
             setShowBookingPage(true);
@@ -151,7 +178,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <CommunicationSkillsPage
-          onClose={() => setShowCommunicationSkillsPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowCommunicationSkillsPage(false);
             setShowBookingPage(true);
@@ -165,7 +192,7 @@ export default function App() {
     return (
       <div className="size-full flex justify-center bg-[#000000]">
         <PersonalityDevelopmentPage
-          onClose={() => setShowPersonalityDevelopmentPage(false)}
+          onClose={() => window.history.back()}
           onBookDemo={() => {
             setShowPersonalityDevelopmentPage(false);
             setShowBookingPage(true);
@@ -253,49 +280,49 @@ export default function App() {
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-56 bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   <button
-                    onClick={() => setShowIELTSPage(true)}
+                    onClick={() => openCoursePage(setShowIELTSPage, 'ielts')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     IELTS Training
                   </button>
                   <button
-                    onClick={() => setShowSpokenEnglishPage(true)}
+                    onClick={() => openCoursePage(setShowSpokenEnglishPage, 'spoken-english')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     Spoken English
                   </button>
                   <button
-                    onClick={() => setShowSoftSkillPage(true)}
+                    onClick={() => openCoursePage(setShowSoftSkillPage, 'soft-skill')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     Soft Skill Development
                   </button>
                   <button
-                    onClick={() => setShowSalesCommunicationPage(true)}
+                    onClick={() => openCoursePage(setShowSalesCommunicationPage, 'sales-communication')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     Sales Communication
                   </button>
                   <button
-                    onClick={() => setShowInterviewPreparationPage(true)}
+                    onClick={() => openCoursePage(setShowInterviewPreparationPage, 'interview-preparation')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     Interview Preparation
                   </button>
                   <button
-                    onClick={() => setShowCommunicationSkillsPage(true)}
+                    onClick={() => openCoursePage(setShowCommunicationSkillsPage, 'communication-skills')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     Communication Skills
                   </button>
                   <button
-                    onClick={() => setShowPersonalityDevelopmentPage(true)}
+                    onClick={() => openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development')}
                     className="block w-full text-left px-4 py-2 text-[#FFFAF0] hover:text-[#C4943A] hover:bg-[rgba(196,148,58,0.1)] transition-colors text-[14px]"
                     style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
@@ -524,7 +551,7 @@ export default function App() {
           <div className="relative z-10 max-w-[1280px] mx-auto grid grid-cols-3 gap-6">
             {/* Card 1 - IELTS Training */}
             <div
-              onClick={() => setShowIELTSPage(true)}
+              onClick={() => openCoursePage(setShowIELTSPage, 'ielts')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
@@ -597,7 +624,7 @@ export default function App() {
 
             {/* Card 2 - Spoken English */}
             <div
-              onClick={() => setShowSpokenEnglishPage(true)}
+              onClick={() => openCoursePage(setShowSpokenEnglishPage, 'spoken-english')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
@@ -670,7 +697,7 @@ export default function App() {
 
             {/* Card 3 - Soft Skill Development */}
             <div
-              onClick={() => setShowSoftSkillPage(true)}
+              onClick={() => openCoursePage(setShowSoftSkillPage, 'soft-skill')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
@@ -743,7 +770,7 @@ export default function App() {
 
             {/* Card 4 - Sales Communication */}
             <div
-              onClick={() => setShowSalesCommunicationPage(true)}
+              onClick={() => openCoursePage(setShowSalesCommunicationPage, 'sales-communication')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
@@ -816,7 +843,7 @@ export default function App() {
 
             {/* Card 5 - Interview Preparation */}
             <div
-              onClick={() => setShowInterviewPreparationPage(true)}
+              onClick={() => openCoursePage(setShowInterviewPreparationPage, 'interview-preparation')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
@@ -889,7 +916,7 @@ export default function App() {
 
             {/* Card 6 - Communication Skills */}
             <div
-              onClick={() => setShowCommunicationSkillsPage(true)}
+              onClick={() => openCoursePage(setShowCommunicationSkillsPage, 'communication-skills')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
@@ -965,7 +992,7 @@ export default function App() {
           {/* Card 7 - Personality Development (Centered) */}
           <div className="relative z-10 max-w-[1280px] mx-auto mt-6 flex justify-center">
             <div
-              onClick={() => setShowPersonalityDevelopmentPage(true)}
+              onClick={() => openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development')}
               className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5 w-full max-w-[400px]"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',

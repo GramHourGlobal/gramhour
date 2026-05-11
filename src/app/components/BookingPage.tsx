@@ -37,7 +37,7 @@ export default function BookingPage({ onClose }: BookingPageProps) {
   };
 
   return (
-    <div className="w-[375px] min-h-screen bg-[#0A0A0A] relative overflow-y-auto">
+    <div className="w-[90vw] max-w-[1000px] min-h-screen bg-[#0A0A0A] relative overflow-y-auto">
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-[#0A0A0A] border-b border-[rgba(196,148,58,0.2)] px-6 py-4">
         <div className="flex items-center justify-between">
@@ -72,7 +72,7 @@ export default function BookingPage({ onClose }: BookingPageProps) {
                 <span className="text-[#C4943A] text-[36px] font-bold">Free Demo</span>
               </h1>
               <p
-                className="text-[#FFFAF0] text-[15px] max-w-[300px] mx-auto"
+                className="text-[#FFFAF0] text-[15px] max-w-[600px] mx-auto"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 Fill in your details and we'll contact you within 24 hours.
@@ -80,7 +80,7 @@ export default function BookingPage({ onClose }: BookingPageProps) {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-[30%]">
           {/* Full Name */}
           <input
             type="text"
@@ -195,7 +195,7 @@ export default function BookingPage({ onClose }: BookingPageProps) {
         ) : (
           /* Success Message */
           <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="bg-[#111111] border border-[#C4943A] rounded-2xl p-10 text-center max-w-[320px]">
+            <div className="bg-[#111111] border border-[#C4943A] rounded-2xl p-10 text-center max-w-[600px]">
               {/* Checkmark */}
               <div className="w-[60px] h-[60px] rounded-full bg-[#C4943A] flex items-center justify-center mx-auto mb-6">
                 <svg className="w-8 h-8 text-[#0A0A0A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

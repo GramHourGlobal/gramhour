@@ -17,7 +17,7 @@ export default function ContactPage({ onClose }: ContactPageProps) {
   };
 
   return (
-    <div className="w-[375px] min-h-screen bg-[#000000] relative overflow-y-auto">
+    <div className="w-[90vw] max-w-[1000px] min-h-screen bg-[#000000] relative overflow-y-auto">
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-[#000000]/95 backdrop-blur-md border-b border-[rgba(196,148,58,0.2)] px-6 py-4">
         <div className="flex items-center justify-between">
@@ -48,7 +48,7 @@ export default function ContactPage({ onClose }: ContactPageProps) {
           <span className="text-[#C4943A] text-[36px] font-bold">Us</span>
         </h1>
         <p
-          className="text-[#FFFAF0] text-[15px] max-w-[300px] mx-auto"
+          className="text-[#FFFAF0] text-[15px] max-w-[600px] mx-auto"
           style={{ fontFamily: 'DM Sans, sans-serif' }}
         >
           We're here to help. Reach out and we'll respond within a few hours.
