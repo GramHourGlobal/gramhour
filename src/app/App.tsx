@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MobileApp from "./MobileApp";
 import DesktopApp from "./DesktopApp";
+import ScrollProgress from "./components/ScrollProgress";
 
 export default function App() {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
@@ -15,5 +16,10 @@ export default function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return isDesktop ? <DesktopApp /> : <MobileApp />;
+  return (
+    <>
+      <ScrollProgress />
+      {isDesktop ? <DesktopApp /> : <MobileApp />}
+    </>
+  );
 }

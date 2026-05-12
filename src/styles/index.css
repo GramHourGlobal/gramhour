@@ -1,3 +1,42 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+/* Hide default scrollbar but keep scrolling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C4943A #0A0A0A;
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg, 
+    #F0C040 0%, 
+    #C4943A 50%, 
+    #8B6914 100%
+  );
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #FFD700 0%,
+    #C4943A 100%
+  );
+  width: 6px;
+}
+
+/* Smooth scrolling for entire site */
+html {
+  scroll-behavior: smooth;
+}
