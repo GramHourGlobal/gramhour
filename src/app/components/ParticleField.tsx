@@ -15,7 +15,7 @@ function ParticleField() {
 
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = canvas.parentElement?.offsetHeight || window.innerHeight;
+      canvas.height = window.innerHeight;
     };
 
     setCanvasSize();
@@ -37,7 +37,7 @@ function ParticleField() {
         : '#F5E6A3',
       speedX: (Math.random() - 0.5) * 0.4,
       speedY: -(Math.random() * 0.5 + 0.1),
-      opacity: Math.random() * 0.6 + 0.2,
+      opacity: Math.random() * 0.35 + 0.1,
       pulse: Math.random() * Math.PI * 2,
       pulseSpeed: Math.random() * 0.02 + 0.005,
       vx: 0,
