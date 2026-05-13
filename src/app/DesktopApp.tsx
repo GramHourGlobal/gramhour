@@ -1,5 +1,6 @@
 import { CircleCheckBig, Target, Award, Users, Star, ChevronLeft, ChevronRight, Instagram, Phone, Mail, Zap, X, ChevronDown, ChevronRight as ChevronRightIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import ParticleField from './components/ParticleField';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
@@ -399,6 +400,7 @@ export default function App() {
 
           {/* Additional Top Glow */}
           <div
+            id="hero-bg"
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] pointer-events-none opacity-30"
             style={{
               background: 'radial-gradient(circle, rgba(196, 163, 90, 0.12), transparent 70%)',
@@ -406,86 +408,72 @@ export default function App() {
             }}
           ></div>
 
-          {/* Floating Gold Particles - Hero Desktop */}
-          <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-hero-desktop">
-            {[...Array(30)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.25 : size === 4 ? 0.18 : 0.12;
-              return (
-                <div
-                  key={i}
-                  className="absolute bg-[#C4943A] rounded-full"
-                  style={{
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    opacity: opacity,
-                    left: `${Math.random() * 100}%`,
-                    top: `${100 + Math.random() * 20}%`,
-                    animation: `floatUp ${15 + Math.random() * 10}s linear infinite`,
-                    animationDelay: `${Math.random() * 5}s`
-                  }}
-                />
-              );
-            })}
-          </div>
+          {/* Hero Particle Canvas */}
+          <ParticleField />
 
           {/* Two Column Layout */}
-          <div className="relative z-10 w-full max-w-[1280px] grid grid-cols-2 gap-20 items-center">
+          <div className="relative z-20 w-full max-w-[1280px] grid grid-cols-2 gap-20 items-center" id="hero-text">
             {/* Left Column - Content */}
             <div className="flex flex-col">
               {/* Heading */}
-              <h1 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
-                <span
-                  className="block text-white text-[64px] leading-[1.05] font-bold tracking-tight"
-                  style={{
-                    textShadow: '0 2px 40px rgba(255, 255, 255, 0.1)'
-                  }}
-                >
-                  Your Future Begins{' '}
-                </span>
-                <span
-                  className="block text-[#C4943A] text-[64px] leading-[1.05] font-bold tracking-tight"
-                  style={{
-                    textShadow: '0 0 40px rgba(196, 163, 90, 0.6), 0 0 80px rgba(196, 163, 90, 0.3)'
-                  }}
-                >
-                  Here
-                </span>
-              </h1>
+                <h1 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  <span
+                    className="block text-white text-[64px] leading-[1.05] font-bold tracking-tight"
+                    style={{
+                      textShadow: '0 2px 40px rgba(255, 255, 255, 0.1)'
+                    }}
+                  >
+                    Your Future Begins{' '}
+                  </span>
+                  <span
+                    className="block text-[#C4943A] text-[64px] leading-[1.05] font-bold tracking-tight"
+                    style={{
+                      textShadow: '0 0 40px rgba(196, 163, 90, 0.6), 0 0 80px rgba(196, 163, 90, 0.3)'
+                    }}
+                  >
+                    Here
+                  </span>
+                </h1>
 
               {/* Subtext */}
-              <p
-                className="text-[#FFFAF0] max-w-[500px] mb-12 leading-[1.7] text-[17px]"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                Master IELTS & Spoken English with expert guidance. Transform your communication, elevate your career, and unlock global opportunities.
-              </p>
+                <p
+                  className="text-[#FFFAF0] max-w-[500px] mb-12 leading-[1.7] text-[17px]"
+                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                >
+                  Master IELTS & Spoken English with expert guidance. Transform your communication, elevate your career, and unlock global opportunities.
+                </p>
+              
 
               {/* Buttons */}
-              <div className="flex gap-4 w-full max-w-[400px]">
-                <button
-                  onClick={() => setShowBookingPage(true)}
-                  className="flex-1 h-14 bg-[#C4943A] text-[#0A0A0A] rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#E0B050] transition-all duration-300"
-                  style={{
-                    fontFamily: 'DM Sans, sans-serif',
-                    boxShadow: '0 0 30px rgba(196, 163, 90, 0.4), 0 8px 24px rgba(196, 163, 90, 0.2)'
-                  }}
-                >
-                  Book Free Demo →
-                </button>
-              </div>
+              
+                <div className="flex gap-4 w-full max-w-[400px]">
+                  <button
+                    onClick={() => setShowBookingPage(true)}
+                    className="flex-1 h-14 bg-[#C4943A] text-[#0A0A0A] rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#E0B050] transition-all duration-300"
+                    style={{
+                      fontFamily: 'DM Sans, sans-serif',
+                      boxShadow: '0 0 30px rgba(196, 163, 90, 0.4), 0 8px 24px rgba(196, 163, 90, 0.2)'
+                    }}
+                  >
+                    Book Free Demo →
+                  </button>
+                </div>
+              
             </div>
 
             {/* Right Column - Large Logo */}
             <div className="flex items-center justify-center">
-              <img
-                src="/logo.png"
-                alt="GramHour Global"
-                className="w-[500px]"
-                style={{
-                  filter: 'drop-shadow(0 0 60px rgba(196, 148, 58, 0.3))'
-                }}
-              />
+              
+                <img
+                  id="hero-logo"
+                  src="/logo.png"
+                  alt="GramHour Global"
+                  className="w-[500px]"
+                  style={{
+                    filter: 'drop-shadow(0 0 60px rgba(196, 148, 58, 0.3))'
+                  }}
+                />
+              
             </div>
           </div>
 
@@ -509,36 +497,17 @@ export default function App() {
 
         {/* All Programs Section */}
         <section className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
-          {/* Floating Gold Particles - Programs Desktop */}
-          <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-programs-desktop">
-            {[...Array(18)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.22 : size === 4 ? 0.18 : 0.14;
-              return (
-                <div
-                  key={i}
-                  className="absolute bg-[#C4943A] rounded-full"
-                  style={{
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    opacity: opacity,
-                    left: `${Math.random() * 100}%`,
-                    top: `${100 + Math.random() * 20}%`,
-                    animation: `floatUp ${15 + Math.random() * 10}s linear infinite`,
-                    animationDelay: `${Math.random() * 5}s`
-                  }}
-                />
-              );
-            })}
-          </div>
+          <ParticleField />
 
           {/* Section Heading */}
-          <div className="relative z-10 text-center mb-16 max-w-[900px] mx-auto">
-            <h2 className="mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span className="text-white text-[44px] font-bold">Our </span>
-              <span className="text-[#C4943A] text-[44px] font-bold">Premium </span>
-              <span className="text-white text-[44px] font-bold">Programs</span>
-            </h2>
+          <div className="relative z-20 text-center mb-16 max-w-[900px] mx-auto">
+            
+              <h2 className="mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span className="text-white text-[44px] font-bold">Our </span>
+                <span className="text-[#C4943A] text-[44px] font-bold">Premium </span>
+                <span className="text-white text-[44px] font-bold">Programs</span>
+              </h2>
+            
             <p
               className="text-[#FFFAF0] text-[17px]"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -550,9 +519,10 @@ export default function App() {
           {/* Cards - 3 Column Grid */}
           <div className="relative z-10 max-w-[1280px] mx-auto grid grid-cols-3 gap-6">
             {/* Card 1 - IELTS Training */}
-            <div
-              onClick={() => openCoursePage(setShowIELTSPage, 'ielts')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
+            
+              <div
+                onClick={() => openCoursePage(setShowIELTSPage, 'ielts')}
+                className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -621,11 +591,13 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
 
             {/* Card 2 - Spoken English */}
-            <div
-              onClick={() => openCoursePage(setShowSpokenEnglishPage, 'spoken-english')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
+            
+              <div
+                onClick={() => openCoursePage(setShowSpokenEnglishPage, 'spoken-english')}
+              className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -694,11 +666,13 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
 
             {/* Card 3 - Soft Skill Development */}
-            <div
-              onClick={() => openCoursePage(setShowSoftSkillPage, 'soft-skill')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
+            
+              <div
+                onClick={() => openCoursePage(setShowSoftSkillPage, 'soft-skill')}
+              className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -767,11 +741,13 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
 
             {/* Card 4 - Sales Communication */}
-            <div
-              onClick={() => openCoursePage(setShowSalesCommunicationPage, 'sales-communication')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
+            
+              <div
+                onClick={() => openCoursePage(setShowSalesCommunicationPage, 'sales-communication')}
+              className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -840,11 +816,13 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
 
             {/* Card 5 - Interview Preparation */}
-            <div
-              onClick={() => openCoursePage(setShowInterviewPreparationPage, 'interview-preparation')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
+            
+              <div
+                onClick={() => openCoursePage(setShowInterviewPreparationPage, 'interview-preparation')}
+              className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -913,11 +891,13 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
 
             {/* Card 6 - Communication Skills */}
-            <div
-              onClick={() => openCoursePage(setShowCommunicationSkillsPage, 'communication-skills')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
+            
+              <div
+                onClick={() => openCoursePage(setShowCommunicationSkillsPage, 'communication-skills')}
+              className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -986,14 +966,16 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
 
           </div>
 
           {/* Card 7 - Personality Development (Centered) */}
           <div className="relative z-10 max-w-[1280px] mx-auto mt-6 flex justify-center">
-            <div
-              onClick={() => openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development')}
-              className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5 w-full max-w-[400px]"
+            
+              <div
+                onClick={() => openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development')}
+              className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5 w-full max-w-[400px]"
               style={{
                 boxShadow: '0px 4px 16px rgba(0,0,0,0.2)',
                 transition: 'all 250ms ease'
@@ -1062,6 +1044,7 @@ export default function App() {
                 </span>
               </div>
             </div>
+            
           </div>
         </section>
 
@@ -1107,7 +1090,7 @@ export default function App() {
           {/* Feature Blocks - 4 Columns */}
           <div className="relative z-10 max-w-[1280px] mx-auto grid grid-cols-4 gap-8">
             {/* Block 1 - Personalized Training */}
-            <div className="flex flex-col items-center text-center">
+            <div className="feature-block flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Target className="w-7 h-7 text-[#C4943A]" />
               </div>
@@ -1126,7 +1109,7 @@ export default function App() {
             </div>
 
             {/* Block 2 - Expert Guidance */}
-            <div className="flex flex-col items-center text-center">
+            <div className="feature-block flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Award className="w-7 h-7 text-[#C4943A]" />
               </div>
@@ -1145,7 +1128,7 @@ export default function App() {
             </div>
 
             {/* Block 3 - Structured Learning */}
-            <div className="flex flex-col items-center text-center">
+            <div className="feature-block flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Users className="w-7 h-7 text-[#C4943A]" />
               </div>
@@ -1164,7 +1147,7 @@ export default function App() {
             </div>
 
             {/* Block 4 - All-In-One Growth Hub */}
-            <div className="flex flex-col items-center text-center">
+            <div className="feature-block flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Zap className="w-7 h-7 text-[#C4943A]" />
               </div>
@@ -1317,28 +1300,7 @@ export default function App() {
 
         {/* Focused Training Section */}
         <section className="px-20 py-32 bg-[#000000] relative overflow-hidden">
-          {/* Floating Gold Particles - Focused Training Desktop */}
-          <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-focused-desktop">
-            {[...Array(16)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.22 : size === 4 ? 0.16 : 0.12;
-              return (
-                <div
-                  key={i}
-                  className="absolute bg-[#C4943A] rounded-full"
-                  style={{
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    opacity: opacity,
-                    left: `${Math.random() * 100}%`,
-                    top: `${100 + Math.random() * 20}%`,
-                    animation: `floatUp ${15 + Math.random() * 10}s linear infinite`,
-                    animationDelay: `${Math.random() * 5}s`
-                  }}
-                />
-              );
-            })}
-          </div>
+          <ParticleField />
 
           {/* Subtle Background Glow */}
           <div
@@ -1379,28 +1341,7 @@ export default function App() {
 
         {/* CTA Section */}
         <section className="px-20 py-32 bg-[#000000] relative overflow-hidden">
-          {/* Floating Gold Particles - CTA Desktop */}
-          <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-cta-desktop">
-            {[...Array(22)].map((_, i) => {
-              const size = [3, 4, 6][Math.floor(Math.random() * 3)];
-              const opacity = size === 6 ? 0.25 : size === 4 ? 0.22 : 0.18;
-              return (
-                <div
-                  key={i}
-                  className="absolute bg-[#C4943A] rounded-full"
-                  style={{
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    opacity: opacity,
-                    left: `${Math.random() * 100}%`,
-                    top: `${100 + Math.random() * 20}%`,
-                    animation: `floatUp ${15 + Math.random() * 10}s linear infinite`,
-                    animationDelay: `${Math.random() * 5}s`
-                  }}
-                />
-              );
-            })}
-          </div>
+          <ParticleField />
 
           {/* Enhanced Radial Glow */}
           <div

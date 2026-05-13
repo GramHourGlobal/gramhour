@@ -1,5 +1,6 @@
 import { CircleCheckBig, Target, Award, Users, Star, ChevronLeft, ChevronRight, Instagram, Phone, Mail, Zap, X, ChevronDown, ChevronRight as ChevronRightIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import ParticleField from './components/ParticleField';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
@@ -541,6 +542,7 @@ export default function App() {
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-32 overflow-hidden">
           {/* Enhanced Radial Glow Background */}
           <div
+            id="hero-bg"
             className="absolute inset-0 pointer-events-none"
             style={{
               background: 'radial-gradient(ellipse 700px 500px at center 60%, rgba(196, 163, 90, 0.15), rgba(196, 163, 90, 0.08) 40%, transparent 70%)'
@@ -556,76 +558,71 @@ export default function App() {
             }}
           ></div>
 
-          {/* Floating Gold Particles */}
-          <div className="absolute inset-0 pointer-events-none z-0">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full bg-[#C4A35A]"
-                style={{
-                  width: `${2 + Math.random() * 2}px`,
-                  height: `${2 + Math.random() * 2}px`,
-                  left: `${Math.random() * 100}%`,
-                  top: `${100 + Math.random() * 20}%`,
-                  opacity: 0.2,
-                  animation: `floatUp ${15 + Math.random() * 10}s linear infinite`,
-                  animationDelay: `${Math.random() * 5}s`
-                }}
-              />
-            ))}
-          </div>
+          {/* Hero Particle Canvas */}
+          
+            <ParticleField />
+          
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center text-center">
+          <div className="relative z-20 flex flex-col items-center text-center" id="hero-text">
             {/* Logo */}
-            <img
-              src="/logo.png"
-              alt="GramHour Global"
-              className="w-50 mb-8"
-              style={{}}
-            />
+            
+              <img
+                id="hero-logo"
+                src="/logo.png"
+                alt="GramHour Global"
+                className="w-50 mb-8"
+                style={{}}
+              />
+            
 
             {/* Heading */}
-            <h1 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span
-                className="block text-white text-[56px] leading-[1.05] font-bold tracking-tight"
-                style={{
-                  textShadow: '0 2px 40px rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                Your Future Begins{' '}
-              </span>
-              <span
-                className="block text-[#C4943A] text-[56px] leading-[1.05] font-bold tracking-tight"
-                style={{
-                  textShadow: '0 0 40px rgba(196, 163, 90, 0.6), 0 0 80px rgba(196, 163, 90, 0.3)'
-                }}
-              >
-                Here
-              </span>
-            </h1>
+            
+              <h1 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span
+                  className="block text-white text-[56px] leading-[1.05] font-bold tracking-tight"
+                  style={{
+                    textShadow: '0 2px 40px rgba(255, 255, 255, 0.1)'
+                  }}
+                >
+                  Your Future Begins{' '}
+                </span>
+                <span
+                  className="block text-[#C4943A] text-[56px] leading-[1.05] font-bold tracking-tight"
+                  style={{
+                    textShadow: '0 0 40px rgba(196, 163, 90, 0.6), 0 0 80px rgba(196, 163, 90, 0.3)'
+                  }}
+                >
+                  Here
+                </span>
+              </h1>
+            
 
             {/* Subtext */}
-            <p
-              className="text-[#FFFAF0] max-w-[310px] mb-12 leading-[1.7] text-[15px]"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              Master IELTS & Spoken English with expert guidance. Transform your communication, elevate your career, and unlock global opportunities.
-            </p>
+            
+              <p
+                className="text-[#FFFAF0] max-w-[310px] mb-12 leading-[1.7] text-[15px]"
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
+              >
+                Master IELTS & Spoken English with expert guidance. Transform your communication, elevate your career, and unlock global opportunities.
+              </p>
+            
 
             {/* Buttons */}
-            <div className="flex flex-col gap-4 w-full max-w-[320px]">
-              <button
-                onClick={() => setShowBookingPage(true)}
-                className="w-full h-14 bg-[#C4943A] text-[#0A0A0A] rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#E0B050] transition-all duration-300"
-                style={{
-                  fontFamily: 'DM Sans, sans-serif',
-                  boxShadow: '0 0 30px rgba(196, 163, 90, 0.4), 0 8px 24px rgba(196, 163, 90, 0.2)'
-                }}
-              >
-                Book Free Demo →
-              </button>
-            </div>
+            
+              <div className="flex flex-col gap-4 w-full max-w-[320px]">
+                <button
+                  onClick={() => setShowBookingPage(true)}
+                  className="w-full h-14 bg-[#C4943A] text-[#0A0A0A] rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#E0B050] transition-all duration-300"
+                  style={{
+                    fontFamily: 'DM Sans, sans-serif',
+                    boxShadow: '0 0 30px rgba(196, 163, 90, 0.4), 0 8px 24px rgba(196, 163, 90, 0.2)'
+                  }}
+                >
+                  Book Free Demo →
+                </button>
+              </div>
+            
           </div>
 
           {/* Floating Animation Keyframes */}
@@ -685,7 +682,7 @@ export default function App() {
           {/* Cards */}
           <div className="relative z-10 flex flex-col gap-5">
             {/* Card 1 - IELTS Training */}
-            <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -745,7 +742,7 @@ export default function App() {
             </div>
 
             {/* Card 2 - Spoken English */}
-            <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-[#C4943A] text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -865,7 +862,7 @@ export default function App() {
             </div>
 
             {/* Card 4 - Sales Communication */}
-            <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -925,7 +922,7 @@ export default function App() {
             </div>
 
             {/* Card 5 - Interview Preparation */}
-            <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -985,7 +982,7 @@ export default function App() {
             </div>
 
             {/* Card 6 - Communication Skills */}
-            <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -1045,7 +1042,7 @@ export default function App() {
             </div>
 
             {/* Card 7 - Personality Development */}
-            <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
