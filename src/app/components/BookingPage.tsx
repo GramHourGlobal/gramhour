@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { X } from 'lucide-react';
 
 interface BookingPageProps {
@@ -6,34 +5,87 @@ interface BookingPageProps {
 }
 
 export default function BookingPage({ onClose }: BookingPageProps) {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    course: '',
-    batchTime: ''
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Build WhatsApp message
-    const whatsappMessage = `Hi GramHour Global! I would like to book a free demo. My details are as follows:%0AName: ${encodeURIComponent(formData.fullName)}%0APhone: ${encodeURIComponent(formData.phone)}%0AEmail: ${encodeURIComponent(formData.email)}%0ACourse: ${encodeURIComponent(formData.course)}%0ABatch Time: ${encodeURIComponent(formData.batchTime)}`;
-    const whatsappURL = `https://wa.me/917904383043?text=${whatsappMessage}`;
+    const name = document.getElementById('name')
+      ?.value || '';
+    const phone = document.getElementById('phone')
+      ?.value || '';
+    const email = document.getElementById('email')
+      ?.value || '';
+    const course = document.getElementById('course')
+      ?.value || '';
+    const batch = document.getElementById('batch')
+      ?.value || '';
 
-    // Open WhatsApp
+    // Validate - make sure name and phone are filled
+    if (!name || !phone) {
+      alert('Please fill in your name and phone number.');
+      return;
+    }
+
+    // BUILD WHATSAPP MESSAGE
+    const whatsappMessage = 
+      `Hi GramHour Global! I'd like to book a free demo.%0A%0A` +
+      `Name: ${encodeURIComponent(name)}%0A` +
+      `Phone: ${encodeURIComponent(phone)}%0A` +
+      `Email: ${encodeURIComponent(email)}%0A` +
+      `Course: ${encodeURIComponent(course)}%0A` +
+      `Batch: ${encodeURIComponent(batch)}`;
+
+    const whatsappURL = 
+      `https://wa.me/917904383043?text=${whatsappMessage}`;
+
+    // BUILD EMAIL
+    const emailSubject = 
+      `Free Demo Booking - ${name}`;
+    const emailBody = 
+      `Hi GramHour Global,%0A%0A` +
+      `I would like to book a free demo.%0A%0A` +
+      `Name: ${name}%0A` +
+      `Phone: ${phone}%0A` +
+      `Email: ${email}%0A` +
+      `Course Interest: ${course}%0A` +
+      `Preferred Batch: ${batch}%0A%0A` +
+      `Please contact me at your earliest convenience.`;
+
+    const mailURL = 
+      `mailto:gramhourglobal@gmail.com` +
+      `?subject=${encodeURIComponent(emailSubject)}` +
+      `&body=${emailBody}`;
+
+    // OPEN WHATSAPP in new tab
     window.open(whatsappURL, '_blank');
 
-    // Show success message
-    setSubmitted(true);
-  };
+    // OPEN EMAIL after 1 second delay
+    setTimeout(() => {
+      window.location.href = mailURL;
+    }, 1000);
 
-  const handleEmailSubmit = () => {
-    const emailBody = `Hi GramHour Global,%0A%0AI would like to book a free demo.%0A%0AName: ${encodeURIComponent(formData.fullName)}%0APhone: ${encodeURIComponent(formData.phone)}%0AEmail: ${encodeURIComponent(formData.email)}%0ACourse Interest: ${encodeURIComponent(formData.course)}%0APreferred Batch: ${encodeURIComponent(formData.batchTime)}%0A%0APlease contact me at your earliest convenience.`;
-    const mailtoURL = `mailto:gramhourglobal@gmail.com?subject=Free Demo Booking - GramHour Global&body=${emailBody}`;
-
-    window.location.href = mailtoURL;
+    // SHOW SUCCESS MESSAGE
+    setTimeout(() => {
+      document.getElementById('demo-form')
+        .innerHTML = `
+        <div style="text-align:center; padding:40px;">
+          <div style="font-size:60px">✅</div>
+          <h2 style="color:#C4943A; font-family:'Playfair Display'">
+            You're All Set!
+          </h2>
+          <p style="color:#FFFAF0">
+            We've received your request on both 
+            WhatsApp and Email. We will contact 
+            you within 24 hours.
+          </p>
+          <p style="color:#C4943A">
+            +91 7904383043
+          </p>
+          <p style="color:#C4943A">
+            gramhourglobal@gmail.com
+          </p>
+        </div>
+      `;
+    }, 1500);
   };
 
   return (
@@ -63,30 +115,27 @@ export default function BookingPage({ onClose }: BookingPageProps) {
 
       {/* Content */}
       <div className="px-6 py-12">
-        {!submitted ? (
-          <>
-            {/* Heading */}
-            <div className="text-center mb-8">
-              <h1 className="mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
-                <span className="text-white text-[36px] font-bold">Book Your </span>
-                <span className="text-[#C4943A] text-[36px] font-bold">Free Demo</span>
-              </h1>
-              <p
-                className="text-[#FFFAF0] text-[15px] max-w-[600px] mx-auto"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                Fill in your details and we'll contact you within 24 hours.
-              </p>
-            </div>
+        {/* Heading */}
+        <div className="text-center mb-8">
+          <h1 className="mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <span className="text-white text-[36px] font-bold">Book Your </span>
+            <span className="text-[#C4943A] text-[36px] font-bold">Free Demo</span>
+          </h1>
+          <p
+            className="text-[#FFFAF0] text-[15px] max-w-[600px] mx-auto"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
+          >
+            Fill in your details and we'll contact you within 24 hours.
+          </p>
+        </div>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-[30%]">
+        {/* Form */}
+        <form id="demo-form" className="flex flex-col gap-5 mx-[30%]">
           {/* Full Name */}
           <input
+            id="name"
             type="text"
             placeholder="Full Name"
-            value={formData.fullName}
-            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
             className="w-full h-14 bg-[#1A1A1A] border border-[#C4943A] rounded-xl px-4 text-white placeholder-[#CCBF9E] focus:outline-none focus:border-[#C4943A] transition-colors"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
             required
@@ -94,10 +143,9 @@ export default function BookingPage({ onClose }: BookingPageProps) {
 
           {/* Phone Number */}
           <input
+            id="phone"
             type="tel"
             placeholder="Phone Number"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="w-full h-14 bg-[#1A1A1A] border border-[#C4943A] rounded-xl px-4 text-white placeholder-[#CCBF9E] focus:outline-none focus:border-[#C4943A] transition-colors"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
             required
@@ -105,10 +153,9 @@ export default function BookingPage({ onClose }: BookingPageProps) {
 
           {/* Email Address */}
           <input
+            id="email"
             type="email"
             placeholder="Email Address"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="w-full h-14 bg-[#1A1A1A] border border-[#C4943A] rounded-xl px-4 text-white placeholder-[#CCBF9E] focus:outline-none focus:border-[#C4943A] transition-colors"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
             required
@@ -116,8 +163,7 @@ export default function BookingPage({ onClose }: BookingPageProps) {
 
           {/* Select Course */}
           <select
-            value={formData.course}
-            onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+            id="course"
             className="w-full h-14 bg-[#1A1A1A] border border-[#C4943A] rounded-xl px-4 text-white focus:outline-none focus:border-[#C4943A] transition-colors appearance-none cursor-pointer"
             style={{
               fontFamily: 'DM Sans, sans-serif',
@@ -143,8 +189,7 @@ export default function BookingPage({ onClose }: BookingPageProps) {
 
           {/* Preferred Batch Time */}
           <select
-            value={formData.batchTime}
-            onChange={(e) => setFormData({ ...formData, batchTime: e.target.value })}
+            id="batch"
             className="w-full h-14 bg-[#1A1A1A] border border-[#C4943A] rounded-xl px-4 text-white focus:outline-none focus:border-[#C4943A] transition-colors appearance-none cursor-pointer"
             style={{
               fontFamily: 'DM Sans, sans-serif',
@@ -166,21 +211,11 @@ export default function BookingPage({ onClose }: BookingPageProps) {
 
           {/* Submit Button */}
           <button
-            type="submit"
+            onClick={handleSubmit}
             className="w-full h-14 bg-[#C4943A] text-[#0A0A0A] font-bold rounded-full hover:bg-[#E0B050] transition-colors mt-2"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             Confirm My Free Demo →
-          </button>
-
-          {/* Email Alternative Button */}
-          <button
-            type="button"
-            onClick={handleEmailSubmit}
-            className="text-[#C4943A] text-[14px] text-center hover:underline"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
-          >
-            Or email us instead →
           </button>
 
           {/* Privacy Notice */}
@@ -191,58 +226,6 @@ export default function BookingPage({ onClose }: BookingPageProps) {
             🔒 Your information is 100% private. No spam ever.
           </p>
         </form>
-          </>
-        ) : (
-          /* Success Message */
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="bg-[#111111] border border-[#C4943A] rounded-2xl p-10 text-center max-w-[600px]">
-              {/* Checkmark */}
-              <div className="w-[60px] h-[60px] rounded-full bg-[#C4943A] flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-[#0A0A0A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-
-              {/* Heading */}
-              <h2
-                className="text-[#FFFAF0] text-[28px] font-bold mb-4"
-                style={{ fontFamily: 'Playfair Display, serif' }}
-              >
-                You're All Set!
-              </h2>
-
-              {/* Body */}
-              <p
-                className="text-[#FFFAF0] text-[15px] mb-6 leading-relaxed"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                Thank you for booking your free demo with GramHour Global. We will contact you on WhatsApp or email within 24 hours.
-              </p>
-
-              {/* Contact Info */}
-              <p
-                className="text-[#C4943A] text-[16px] font-semibold mb-2"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                +91 7904383043
-              </p>
-              <p
-                className="text-[#C4943A] text-[16px] font-semibold mb-6"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                gramhourglobal@gmail.com
-              </p>
-
-              {/* Footer Message */}
-              <p
-                className="text-[rgba(255,250,240,0.7)] text-[14px]"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                We look forward to speaking with you!
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
