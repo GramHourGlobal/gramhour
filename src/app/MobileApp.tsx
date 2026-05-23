@@ -1,12 +1,17 @@
 import { CircleCheckBig, Target, Award, Users, Star, ChevronLeft, ChevronRight, Instagram, Phone, Mail, Zap, X, ChevronDown, ChevronRight as ChevronRightIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 import ParticleField from './components/ParticleField';
+import RevealSection from '../components/RevealSection';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
 import SpokenEnglishPage from './components/SpokenEnglishPage';
 import SoftSkillPage from './components/SoftSkillPage';
 import SalesCommunicationPage from './components/SalesCommunicationPage';
+import TiltCard from '../components/TiltCard';
 import InterviewPreparationPage from './components/InterviewPreparationPage';
 import CommunicationSkillsPage from './components/CommunicationSkillsPage';
 import PersonalityDevelopmentPage from './components/PersonalityDevelopmentPage';
@@ -79,6 +84,75 @@ export default function App() {
     setShowCommunicationSkillsPage(false);
     setShowPersonalityDevelopmentPage(false);
   };
+
+  // Refs for GSAP animations
+  const heroRef = useRef<HTMLElement | null>(null);
+  const headingRef = useRef<HTMLElement | null>(null);
+  const subRef = useRef<HTMLElement | null>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const logoRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+
+      tl.fromTo(
+        headingRef.current,
+        { y: 100, opacity: 0, skewY: 5 },
+        { y: 0, opacity: 1, skewY: 0, duration: 1.2, ease: 'power4.out' }
+      )
+        .fromTo(
+          subRef.current,
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+          '-=0.6'
+        )
+        .fromTo(
+          btnRef.current,
+          { y: 40, opacity: 0, scale: 0.9 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.7)' },
+          '-=0.4'
+        )
+        .fromTo(
+          logoRef.current,
+          { x: 80, opacity: 0, rotation: -5 },
+          { x: 0, opacity: 1, rotation: 0, duration: 1.1, ease: 'power3.out' },
+          '-=1.0'
+        );
+
+      // SCROLL OUT — hero exits dramatically
+      gsap.to(heroRef.current, {
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+        y: -150,
+        opacity: 0.3,
+        scale: 0.95,
+      });
+
+      // HEADING parallax on scroll
+      gsap.to(headingRef.current, {
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 2,
+        },
+        y: -40,
+        ease: 'none'
+      });
+    }, heroRef);
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.clearScrollMemory();
+      window.scrollTo(0, 0);
+    };
+  }, []);
 
   const openCoursePage = (setter: (value: boolean) => void, pageName: string) => {
     setter(true);
@@ -539,7 +613,8 @@ export default function App() {
         )}
 
         {/* Hero Section */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-32 overflow-hidden">
+        <section ref={heroRef} className="relative overflow-hidden">
+          <RevealSection direction="up" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-32 overflow-hidden">
           {/* Enhanced Radial Glow Background */}
           <div
             id="hero-bg"
@@ -568,17 +643,24 @@ export default function App() {
             {/* Logo */}
             
               <img
-                id="hero-logo"
+                ref={logoRef}
                 src="/logo.png"
                 alt="GramHour Global"
-                className="w-50 mb-8"
-                style={{}}
+                style={{
+                  height: '200px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  display: 'block',
+                  position: 'relative',
+                  transform: 'none',
+                  willChange: 'auto'
+                }}
               />
             
 
             {/* Heading */}
             
-              <h1 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <h1 ref={headingRef} className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
                 <span
                   className="block text-white text-[56px] leading-[1.05] font-bold tracking-tight"
                   style={{
@@ -601,6 +683,7 @@ export default function App() {
             {/* Subtext */}
             
               <p
+                ref={subRef}
                 className="text-[#FFFAF0] max-w-[310px] mb-12 leading-[1.7] text-[15px]"
                 style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
@@ -612,6 +695,7 @@ export default function App() {
             
               <div className="flex flex-col gap-4 w-full max-w-[320px]">
                 <button
+                  ref={btnRef}
                   onClick={() => setShowBookingPage(true)}
                   className="w-full h-14 bg-[#C4943A] text-[#0A0A0A] rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#E0B050] transition-all duration-300"
                   style={{
@@ -641,10 +725,11 @@ export default function App() {
               }
             }
           `}</style>
+        </RevealSection>
         </section>
 
         {/* All Programs Section */}
-        <section className="relative px-6 py-20 bg-[#0A0A0A] overflow-hidden">
+        <RevealSection direction="up" className="relative px-6 py-20 bg-[#0A0A0A] overflow-hidden">
           {/* Particles - Programs */}
           <div className="absolute inset-0 pointer-events-none z-0">
             {[...Array(10)].map((_, i) => (
@@ -682,7 +767,7 @@ export default function App() {
           {/* Cards */}
           <div className="relative z-10 flex flex-col gap-5">
             {/* Card 1 - IELTS Training */}
-            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -736,13 +821,12 @@ export default function App() {
               >
                 View Course →
               </button>
-
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
-            </div>
+            </TiltCard>
 
             {/* Card 2 - Spoken English */}
-            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-[#C4943A] text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -796,10 +880,9 @@ export default function App() {
               >
                 View Course →
               </button>
-
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
-            </div>
+            </TiltCard>
 
             {/* Card 3 - Soft Skill Development */}
             <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
@@ -862,7 +945,7 @@ export default function App() {
             </div>
 
             {/* Card 4 - Sales Communication */}
-            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -916,13 +999,12 @@ export default function App() {
               >
                 View Course →
               </button>
-
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
-            </div>
+            </TiltCard>
 
             {/* Card 5 - Interview Preparation */}
-            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -976,13 +1058,12 @@ export default function App() {
               >
                 View Course →
               </button>
-
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
-            </div>
+            </TiltCard>
 
             {/* Card 6 - Communication Skills */}
-            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -1036,13 +1117,12 @@ export default function App() {
               >
                 View Course →
               </button>
-
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
-            </div>
+            </TiltCard>
 
             {/* Card 7 - Personality Development */}
-            <div className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
+            <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -1096,15 +1176,14 @@ export default function App() {
               >
                 View Course →
               </button>
-
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
-            </div>
+            </TiltCard>
           </div>
-        </section>
+        </RevealSection>
 
         {/* Why GramHour Global Section - Simple */}
-        <section className="relative px-6 py-20 bg-[#0A0A0A] overflow-hidden">
+        <RevealSection direction="left" className="relative px-6 py-20 bg-[#0A0A0A] overflow-hidden">
           {/* Particles - Why GramHour */}
           <div className="absolute inset-0 pointer-events-none z-0">
             {[...Array(8)].map((_, i) => (
@@ -1216,10 +1295,10 @@ export default function App() {
               </p>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
         {/* Student Success Stories Section */}
-        <section className="relative px-6 py-20 bg-[#0A0A0A] overflow-hidden">
+        <RevealSection direction="right" className="relative px-6 py-20 bg-[#0A0A0A] overflow-hidden">
           {/* Particles - Testimonials */}
           <div className="absolute inset-0 pointer-events-none z-0">
             {[...Array(6)].map((_, i) => (
@@ -1343,10 +1422,10 @@ export default function App() {
               />
             ))}
           </div>
-        </section>
+        </RevealSection>
 
         {/* Focused Training Section */}
-        <section className="px-6 py-28 bg-[#000000] relative overflow-hidden">
+        <RevealSection direction="up" className="px-6 py-28 bg-[#000000] relative overflow-hidden">
           {/* Particles - Focused Training */}
           <div className="absolute inset-0 pointer-events-none z-0">
             {[...Array(9)].map((_, i) => (
@@ -1401,17 +1480,18 @@ export default function App() {
               We don't believe in shortcuts. Every program is designed to build lasting skills, genuine fluency, and the confidence to succeed on any global platform.
             </p>
           </div>
-        </section>
+        </RevealSection>
 
         {/* CTA Section */}
         <section className="px-6 py-28 bg-[#000000] relative overflow-hidden">
-          {/* Particles - CTA */}
-          <div className="absolute inset-0 pointer-events-none z-0">
-            {[...Array(14)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full bg-[#C4A35A]"
-                style={{
+          <RevealSection direction="up" className="h-full w-full">
+            {/* Particles - CTA */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+              {[...Array(14)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full bg-[#C4A35A]"
+                  style={{
                   width: `${2 + Math.random() * 2}px`,
                   height: `${2 + Math.random() * 2}px`,
                   left: `${Math.random() * 100}%`,
@@ -1472,6 +1552,7 @@ export default function App() {
               Book Your Free Demo →
             </button>
           </div>
+        </RevealSection>
         </section>
 
         {/* Footer */}

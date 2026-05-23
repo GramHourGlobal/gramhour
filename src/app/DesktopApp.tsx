@@ -1,6 +1,10 @@
 import { CircleCheckBig, Target, Award, Users, Star, ChevronLeft, ChevronRight, Instagram, Phone, Mail, Zap, X, ChevronDown, ChevronRight as ChevronRightIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 import ParticleField from './components/ParticleField';
+import RevealSection from '../components/RevealSection';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
@@ -12,6 +16,7 @@ import CommunicationSkillsPage from './components/CommunicationSkillsPage';
 import PersonalityDevelopmentPage from './components/PersonalityDevelopmentPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
+import TiltCard from '../components/TiltCard';
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -96,6 +101,44 @@ export default function App() {
   const [showPersonalityDevelopmentPage, setShowPersonalityDevelopmentPage] = useState(false);
   const [showAboutPage, setShowAboutPage] = useState(false);
   const [showContactPage, setShowContactPage] = useState(false);
+
+  // Refs for GSAP animations
+  const heroRef = useRef<HTMLElement | null>(null);
+  const headingRef = useRef<HTMLElement | null>(null);
+  const subRef = useRef<HTMLElement | null>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const logoRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.2 });
+
+      tl.fromTo(
+        headingRef.current,
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out' }
+      )
+        .fromTo(
+          subRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+          '-=0.5'
+        )
+        .fromTo(
+          btnRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
+          '-=0.4'
+        );
+    }, heroRef);
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.clearScrollMemory();
+      ScrollTrigger.refresh();
+    };
+  }, []);
 
   if (showBookingPage) {
     return (
@@ -389,7 +432,18 @@ export default function App() {
 
 
         {/* Hero Section - Desktop Two Column */}
-        <section className="relative min-h-screen flex items-center justify-center px-20 pt-32 pb-40 overflow-hidden">
+        <section
+          ref={heroRef}
+          style={{
+            position: 'relative',
+            width: '100%',
+            minHeight: '100vh',
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center'
+          }}
+          className="px-20 pt-32 pb-40"
+        >
           {/* Enhanced Radial Glow Background */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -414,9 +468,29 @@ export default function App() {
           {/* Two Column Layout */}
           <div className="relative z-20 w-full max-w-[1280px] grid grid-cols-2 gap-20 items-center" id="hero-text">
             {/* Left Column - Content */}
-            <div className="flex flex-col">
+            <div
+              className="flex flex-col"
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                transform: 'none',
+                willChange: 'auto',
+                flex: 1,
+                padding: '0 0 0 80px'
+              }}
+            >
               {/* Heading */}
-                <h1 className="mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <h1
+                  ref={headingRef}
+                  className="mb-8"
+                  style={{
+                    fontFamily: 'Playfair Display, serif',
+                    position: 'relative',
+                    transform: 'none',
+                    willChange: 'auto',
+                    margin: 0
+                  }}
+                >
                   <span
                     className="block text-white text-[64px] leading-[1.05] font-bold tracking-tight"
                     style={{
@@ -437,8 +511,15 @@ export default function App() {
 
               {/* Subtext */}
                 <p
+                  ref={subRef}
                   className="text-[#FFFAF0] max-w-[500px] mb-12 leading-[1.7] text-[17px]"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{
+                    fontFamily: 'DM Sans, sans-serif',
+                    position: 'relative',
+                    transform: 'none',
+                    willChange: 'auto',
+                    margin: '24px 0'
+                  }}
                 >
                   Master IELTS & Spoken English with expert guidance. Transform your communication, elevate your career, and unlock global opportunities.
                 </p>
@@ -448,11 +529,15 @@ export default function App() {
               
                 <div className="flex gap-4 w-full max-w-[400px]">
                   <button
+                    ref={btnRef}
                     onClick={() => setShowBookingPage(true)}
                     className="flex-1 h-14 bg-[#C4943A] text-[#0A0A0A] rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-[#E0B050] transition-all duration-300"
                     style={{
                       fontFamily: 'DM Sans, sans-serif',
-                      boxShadow: '0 0 30px rgba(196, 163, 90, 0.4), 0 8px 24px rgba(196, 163, 90, 0.2)'
+                      boxShadow: '0 0 30px rgba(196, 163, 90, 0.4), 0 8px 24px rgba(196, 163, 90, 0.2)',
+                      position: 'relative',
+                      transform: 'none',
+                      willChange: 'auto'
                     }}
                   >
                     Book Free Demo →
@@ -462,18 +547,32 @@ export default function App() {
             </div>
 
             {/* Right Column - Large Logo */}
-            <div className="flex items-center justify-center">
-              
-                <img
-                  id="hero-logo"
-                  src="/logo.png"
-                  alt="GramHour Global"
-                  className="w-[500px]"
-                  style={{
-                    filter: 'drop-shadow(0 0 60px rgba(196, 148, 58, 0.3))'
-                  }}
-                />
-              
+            <div
+              className="flex items-center justify-center"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                zIndex: 2,
+                transform: 'none'
+              }}
+            >
+              <img
+                src="/logo.png"
+                alt="GramHour Global"
+                id="hero-logo"
+                ref={logoRef}
+                style={{
+                  height: '320px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  display: 'block',
+                  position: 'relative',
+                  transform: 'none',
+                  willChange: 'auto'
+                }}
+              />
             </div>
           </div>
 
@@ -496,7 +595,7 @@ export default function App() {
         </section>
 
         {/* All Programs Section */}
-        <section className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
+        <RevealSection direction="up" className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
           <ParticleField />
 
           {/* Section Heading */}
@@ -519,8 +618,8 @@ export default function App() {
           {/* Cards - 3 Column Grid */}
           <div className="relative z-10 max-w-[1280px] mx-auto grid grid-cols-3 gap-6">
             {/* Card 1 - IELTS Training */}
-            
-              <div
+
+              <TiltCard
                 onClick={() => openCoursePage(setShowIELTSPage, 'ielts')}
                 className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
@@ -528,10 +627,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -590,12 +689,12 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
 
             {/* Card 2 - Spoken English */}
-            
-              <div
+
+              <TiltCard
                 onClick={() => openCoursePage(setShowSpokenEnglishPage, 'spoken-english')}
               className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
@@ -603,10 +702,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -665,12 +764,12 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
 
             {/* Card 3 - Soft Skill Development */}
-            
-              <div
+
+              <TiltCard
                 onClick={() => openCoursePage(setShowSoftSkillPage, 'soft-skill')}
               className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
@@ -678,10 +777,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -740,12 +839,12 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
 
             {/* Card 4 - Sales Communication */}
-            
-              <div
+
+              <TiltCard
                 onClick={() => openCoursePage(setShowSalesCommunicationPage, 'sales-communication')}
               className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
@@ -753,10 +852,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -815,12 +914,12 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
 
             {/* Card 5 - Interview Preparation */}
-            
-              <div
+
+              <TiltCard
                 onClick={() => openCoursePage(setShowInterviewPreparationPage, 'interview-preparation')}
               className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
@@ -828,10 +927,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -890,12 +989,12 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
 
             {/* Card 6 - Communication Skills */}
-            
-              <div
+
+              <TiltCard
                 onClick={() => openCoursePage(setShowCommunicationSkillsPage, 'communication-skills')}
               className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5"
               style={{
@@ -903,10 +1002,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -965,7 +1064,7 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
 
           </div>
@@ -973,7 +1072,7 @@ export default function App() {
           {/* Card 7 - Personality Development (Centered) */}
           <div className="relative z-10 max-w-[1280px] mx-auto mt-6 flex justify-center">
             
-              <div
+              <TiltCard
                 onClick={() => openCoursePage(setShowPersonalityDevelopmentPage, 'personality-development')}
               className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 cursor-pointer transition-all duration-250 hover:border-[rgba(196,148,58,0.9)] hover:border-2 hover:-translate-y-1.5 w-full max-w-[400px]"
               style={{
@@ -981,10 +1080,10 @@ export default function App() {
                 transition: 'all 250ms ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 0px 20px rgba(196,148,58,0.3), 0px 12px 32px rgba(196,148,58,0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0px 4px 16px rgba(0,0,0,0.2)';
               }}
             >
               {/* View Course Badge */}
@@ -1043,13 +1142,13 @@ export default function App() {
                   Explore Course →
                 </span>
               </div>
-            </div>
+            </TiltCard>
             
           </div>
-        </section>
+        </RevealSection>
 
         {/* Why GramHour Global Section */}
-        <section id="why-gramhour-section" className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
+        <RevealSection direction="left" className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
           {/* Floating Gold Particles - Why GramHour Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-whygramhour-desktop">
             {[...Array(14)].map((_, i) => {
@@ -1165,10 +1264,10 @@ export default function App() {
               </p>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
         {/* Student Success Stories Section */}
-        <section className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
+        <RevealSection direction="right" className="relative px-20 py-32 bg-[#0A0A0A] overflow-hidden">
           {/* Floating Gold Particles - Testimonials Desktop */}
           <div className="absolute inset-0 pointer-events-none z-0" data-layer="particles-testimonials-desktop">
             {[...Array(12)].map((_, i) => {
@@ -1296,10 +1395,10 @@ export default function App() {
               />
             ))}
           </div>
-        </section>
+        </RevealSection>
 
         {/* Focused Training Section */}
-        <section className="px-20 py-32 bg-[#000000] relative overflow-hidden">
+        <RevealSection direction="up" className="px-20 py-32 bg-[#000000] relative overflow-hidden">
           <ParticleField />
 
           {/* Subtle Background Glow */}
@@ -1337,10 +1436,10 @@ export default function App() {
               We don't believe in shortcuts. Every program is designed to build lasting skills, genuine fluency, and the confidence to succeed on any global platform.
             </p>
           </div>
-        </section>
+        </RevealSection>
 
         {/* CTA Section */}
-        <section className="px-20 py-32 bg-[#000000] relative overflow-hidden">
+        <RevealSection direction="up" className="px-20 py-32 bg-[#000000] relative overflow-hidden">
           <ParticleField />
 
           {/* Enhanced Radial Glow */}
@@ -1391,7 +1490,7 @@ export default function App() {
               Book Your Free Demo →
             </button>
           </div>
-        </section>
+        </RevealSection>
 
         {/* Footer */}
         <footer className="relative px-20 py-20 bg-[#000000] border-t border-[rgba(196,148,58,0.2)] overflow-hidden">
