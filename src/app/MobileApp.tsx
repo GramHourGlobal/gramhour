@@ -5,6 +5,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import ParticleField from './components/ParticleField';
 import RevealSection from '../components/RevealSection';
+import {
+  RevealOnScroll,
+  StaggerContainer,
+  StaggerItem
+} from '../components/RevealOnScroll';
 import BookingPage from './components/BookingPage';
 import IELTSPage from './components/IELTSPage';
 import TestimonialsPage from './components/TestimonialsPage';
@@ -751,11 +756,13 @@ export default function App() {
 
           {/* Section Heading */}
           <div className="relative z-10 text-center mb-12">
-            <h2 className="mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span className="text-white text-[36px] font-bold">Our </span>
-              <span className="text-[#C4943A] text-[36px] font-bold">Premium </span>
-              <span className="text-white text-[36px] font-bold">Programs</span>
-            </h2>
+            <RevealOnScroll>
+              <h2 className="mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span className="text-white text-[36px] font-bold">Our </span>
+                <span className="text-[#C4943A] text-[36px] font-bold">Premium </span>
+                <span className="text-white text-[36px] font-bold">Programs</span>
+              </h2>
+            </RevealOnScroll>
             <p
               className="text-[#FFFAF0] max-w-[327px] mx-auto"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -763,10 +770,11 @@ export default function App() {
               Carefully crafted courses designed for excellence and real-world success
             </p>
           </div>
-
           {/* Cards */}
+          <StaggerContainer>
           <div className="relative z-10 flex flex-col gap-5">
             {/* Card 1 - IELTS Training */}
+            <StaggerItem>
             <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
@@ -824,8 +832,10 @@ export default function App() {
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </TiltCard>
+            </StaggerItem>
 
             {/* Card 2 - Spoken English */}
+            <StaggerItem>
             <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-[#C4943A] text-[24px] font-bold mb-2"
@@ -883,8 +893,10 @@ export default function App() {
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </TiltCard>
+            </StaggerItem>
 
             {/* Card 3 - Soft Skill Development */}
+            <StaggerItem>
             <div className="relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
@@ -943,8 +955,10 @@ export default function App() {
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </div>
+            </StaggerItem>
 
             {/* Card 4 - Sales Communication */}
+            <StaggerItem>
             <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
@@ -1002,8 +1016,10 @@ export default function App() {
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </TiltCard>
+            </StaggerItem>
 
             {/* Card 5 - Interview Preparation */}
+            <StaggerItem>
             <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
@@ -1061,8 +1077,10 @@ export default function App() {
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </TiltCard>
+            </StaggerItem>
 
             {/* Card 6 - Communication Skills */}
+            <StaggerItem>
             <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
               <h3
                 className="text-white text-[24px] font-bold mb-2"
@@ -1120,6 +1138,7 @@ export default function App() {
               {/* Animated bottom border */}
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </TiltCard>
+            </StaggerItem>
 
             {/* Card 7 - Personality Development */}
             <TiltCard className="course-card relative bg-[#0F0A00] border border-[rgba(196,148,58,0.3)] rounded-2xl p-6 hover:border-[rgba(196,148,58,0.5)] hover:-translate-y-1 transition-all duration-200 overflow-hidden group hover:shadow-[0_8px_24px_rgba(196,148,58,0.25)]">
@@ -1180,6 +1199,7 @@ export default function App() {
               <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C4943A] to-transparent animate-shimmer"></div>
             </TiltCard>
           </div>
+          </StaggerContainer>
         </RevealSection>
 
         {/* Why GramHour Global Section - Simple */}
@@ -1205,10 +1225,12 @@ export default function App() {
 
           {/* Section Heading */}
           <div className="relative z-10 text-center mb-12">
-            <h2 className="mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span className="text-white text-[36px] font-bold">Why </span>
-              <span className="text-[#C4943A] text-[36px] font-bold">GramHour Global</span>
-            </h2>
+            <RevealOnScroll>
+              <h2 className="mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span className="text-white text-[36px] font-bold">Why </span>
+                <span className="text-[#C4943A] text-[36px] font-bold">GramHour Global</span>
+              </h2>
+            </RevealOnScroll>
             <p
               className="text-[#FFFAF0] max-w-[327px] mx-auto"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -1218,8 +1240,10 @@ export default function App() {
           </div>
 
           {/* Feature Blocks */}
+          <StaggerContainer>
           <div className="relative z-10 flex flex-col gap-10">
             {/* Block 1 - Personalized Training */}
+            <StaggerItem>
             <div className="flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Target className="w-7 h-7 text-[#C4943A]" />
@@ -1237,8 +1261,10 @@ export default function App() {
                 Every student gets a tailored roadmap built around their unique goals, strengths, and learning pace.
               </p>
             </div>
+            </StaggerItem>
 
             {/* Block 2 - Expert Guidance */}
+            <StaggerItem>
             <div className="flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Award className="w-7 h-7 text-[#C4943A]" />
@@ -1256,8 +1282,10 @@ export default function App() {
                 Learn from certified professionals with real-world experience across corporate, academic, and global platforms.
               </p>
             </div>
+            </StaggerItem>
 
             {/* Block 3 - Structured Learning */}
+            <StaggerItem>
             <div className="flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Users className="w-7 h-7 text-[#C4943A]" />
@@ -1275,8 +1303,10 @@ export default function App() {
                 Proven step-by-step methodologies that deliver measurable results — not just knowledge, but transformation.
               </p>
             </div>
+            </StaggerItem>
 
             {/* Block 4 - All-In-One Growth Hub */}
+            <StaggerItem>
             <div className="flex flex-col items-center text-center">
               <div className="w-14 h-14 bg-[#1A0F00] rounded-[14px] flex items-center justify-center mb-4">
                 <Zap className="w-7 h-7 text-[#C4943A]" />
@@ -1294,7 +1324,9 @@ export default function App() {
                 From IELTS to personality development — everything you need to become a confident, globally competitive individual. All under one roof.
               </p>
             </div>
+            </StaggerItem>
           </div>
+          </StaggerContainer>
         </RevealSection>
 
         {/* Student Success Stories Section */}
@@ -1320,10 +1352,12 @@ export default function App() {
 
           {/* Section Heading */}
           <div className="relative z-10 text-center mb-12">
-            <h2 className="mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span className="text-[#FFFAF0] text-[36px] font-bold">Student </span>
-              <span className="text-[#C4943A] text-[36px] font-bold">Success Stories</span>
-            </h2>
+            <RevealOnScroll direction="up" delay={0.1}>
+              <h2 className="mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span className="text-[#FFFAF0] text-[36px] font-bold">Student </span>
+                <span className="text-[#C4943A] text-[36px] font-bold">Success Stories</span>
+              </h2>
+            </RevealOnScroll>
             <p
               className="text-[rgba(255,250,240,0.8)] text-[15px]"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
@@ -1333,6 +1367,7 @@ export default function App() {
           </div>
 
           {/* Carousel Container */}
+          <RevealOnScroll delay={0.3}>
           <div className="relative z-10 mb-8">
             {/* Navigation Arrows */}
             <div className="flex items-center justify-between gap-4">
@@ -1406,6 +1441,7 @@ export default function App() {
               </button>
             </div>
           </div>
+          </RevealOnScroll>
 
           {/* Pagination Dots */}
           <div className="relative z-10 flex gap-2 items-center justify-center">
@@ -1455,15 +1491,17 @@ export default function App() {
           ></div>
 
           <div className="text-center max-w-[310px] mx-auto relative z-10">
-            <h2
-              className="text-white text-[34px] font-bold mb-4 tracking-tight leading-[1.15]"
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                textShadow: '0 2px 30px rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              Focused, Result-Driven Training
-            </h2>
+            <RevealOnScroll direction="left">
+              <h2
+                className="text-white text-[34px] font-bold mb-4 tracking-tight leading-[1.15]"
+                style={{
+                  fontFamily: 'Playfair Display, serif',
+                  textShadow: '0 2px 30px rgba(255, 255, 255, 0.1)'
+                }}
+              >
+                Focused, Result-Driven Training
+              </h2>
+            </RevealOnScroll>
             <h3
               className="text-[#C4943A] text-[19px] mb-5 font-medium"
               style={{
@@ -1473,12 +1511,14 @@ export default function App() {
             >
               Built for Real-World Confidence
             </h3>
-            <p
-              className="text-[rgba(255,250,240,0.8)] text-[15px] leading-[1.7]"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              We don't believe in shortcuts. Every program is designed to build lasting skills, genuine fluency, and the confidence to succeed on any global platform.
-            </p>
+            <RevealOnScroll direction="right" delay={0.2}>
+              <p
+                className="text-[rgba(255,250,240,0.8)] text-[15px] leading-[1.7]"
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
+              >
+                We don't believe in shortcuts. Every program is designed to build lasting skills, genuine fluency, and the confidence to succeed on any global platform.
+              </p>
+            </RevealOnScroll>
           </div>
         </RevealSection>
 
